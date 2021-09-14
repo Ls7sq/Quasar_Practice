@@ -14,7 +14,9 @@
     "quasar": "^1.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0"
+    "@quasar/app": "^2.0.0",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^10.2.0"
   },
   "browserslist": [
     "last 10 Chrome versions",
