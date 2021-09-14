@@ -5,10 +5,16 @@
       {{counter}}  
     </button>
 
-    <input v-model="message" 
+    <input 
+      v-model="message"
+      v-autofocus
       @keyup.esc="clearMessage"
       @keyup.enter="aleartMessage"
+      :style="errorStyle"
       />
+
+    <div>{{message.length}}</div>
+
     <button @click="clearMessage">clear</button>
     <h5 
       v-if="message.length"
@@ -35,8 +41,16 @@ export default {
   },
   computed:{
     messageUppercase(){
-      console.log('messageUppercase was fired');
+      console.log('message.length: '+ this.message.length);
       return this.message.toUpperCase() + this.counter;
+    },
+    errorStyle(){
+      if (this.message.length>20 || this.message === "luoshiqi") {
+        return{
+          'color':'red',
+          'background-color':'pink'
+        }
+      }
     }
   },
   methods: {  
@@ -57,8 +71,16 @@ export default {
   },
   filters:{
     messageLowercase(value){
-      console.log('messageLowercase was fired');//After button click still be active
+      //console.log('messageLowercase was fired');//After button click still be active
       return value.toLowerCase();
+    }
+  },
+  directives:{
+    autofocus:{
+      inserted(el){
+        //console.log('input insterted')
+        el.focus();
+      }
     }
   }
 }
@@ -67,5 +89,12 @@ export default {
 <style type="text/css">
   .border-gray{
     border:  1px solid grey;
+  }
+  input , button{
+    font-size: 24px;
+  }
+  .error{
+    color: red;
+    background-color: pink;
   }
 </style>
