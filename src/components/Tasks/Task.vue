@@ -2,7 +2,7 @@
 	<q-item 
         v-ripple
         clickable
-        @click="task.completed = !task.completed"
+        @click="updateTask({id: id, updates:{completed: !task.completed}})"
         :class="!task.completed ? 'bg-orange-2' : 'bg-green-2' "
       >
         <q-item-section side top>
@@ -44,8 +44,14 @@
 </template>
 
 <script>
+	import {mapActions}from 'vuex'
+
 	export default{
-		props:['task','id']
+		props:['task','id'],
+
+		methods:{
+			...mapActions('tasks',['updateTask'])
+		}
 	}
 </script>
 
