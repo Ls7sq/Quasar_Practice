@@ -40,19 +40,42 @@
             </div>
           </div>
         </q-item-section>
+
+        <q-item-section side>
+        	<q-btn
+        		@click.stop="promptToDelete(id)" 
+        		flat 
+        		round
+        		dense 
+        		color='red' 
+        		icon="delete"/>
+        	
+        </q-item-section>
       </q-item>
 </template>
 
 <script>
-	import {mapActions}from 'vuex'
+import {mapActions}from 'vuex'
+import { Dialog } from 'quasar'
 
-	export default{
-		props:['task','id'],
+export default{
+	props:['task','id'],
 
-		methods:{
-			...mapActions('tasks',['updateTask'])
-		}
+	methods:{
+	...mapActions('tasks',['updateTask', 'deleteTask']),
+	promptToDelete(id){
+	      Dialog.create({
+	        title: 'Confirm',
+	        message: 'Really delete?',
+	        ok:{push:true},
+	        cancel: {color:'negative'},
+	        persistent: true
+	      }).onOk(() => {
+	        this.deleteTask(id)
+	      })		
+	  }
 	}
+}
 </script>
 
 <style>
