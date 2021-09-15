@@ -6,12 +6,14 @@
         :class="!task.completed ? 'bg-orange-2' : 'bg-green-2' "
       >
         <q-item-section side top>
-          <q-checkbox v-model="task.completed" />
+          <q-checkbox 
+          	:value="task.completed"
+          	class="no-pointer-events" />
         </q-item-section>
 
         <q-item-section>
           <q-item-label 
-            :class="{'text-strikethrough': task.completed}">
+            :class="{'text-strike': task.completed}">
             {{task.name}}
           </q-item-label>
         </q-item-section>
@@ -61,6 +63,7 @@ import { Dialog } from 'quasar'
 export default{
 	props:['task','id'],
 
+  //pass to the store-tasks actions and mutations
 	methods:{
 	...mapActions('tasks',['updateTask', 'deleteTask']),
 	promptToDelete(id){

@@ -1,4 +1,4 @@
-import Vue from 'vue'
+　import Vue from 'vue'
 
 const state = {
 	tasks:{
@@ -46,6 +46,7 @@ const actions = {
 }
 
 const getters = {
+	//pass to the pagetodo.vue
 	tasks: (state)=>{
 		return state.tasks
 	}
