@@ -78,6 +78,9 @@
 </template>
 
 <script>
+
+  import{ mapActions }from 'vuex'
+
   export default{
     data(){
       return{
@@ -90,6 +93,9 @@
       }
     },
     methods:{
+      //Here can trigger the anction called addTask in store-tasks.js
+      ...mapActions('tasks',['addTask']),
+
       submitForm(){
         this.$refs.name.validate()
         //console.log(this.$refs.name)
@@ -98,7 +104,10 @@
         }
       },
       submitTask(){
-        console.log("submitForm");
+        this.addTask(this.taskToSubmit)
+
+        //triger the event in PageTodo.vue at <add-task/>
+        this.$emit('close')      
       }
     },
     directives:{
