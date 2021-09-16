@@ -4,24 +4,9 @@
 
     <form @submit.prevent="submitForm">
       <q-card-section class="q-pt-none">
-        <div row class="q-mb-sm">
-          <q-input 
-            outlined 
-            v-model="taskToSubmit.name" 
-            label="Task Name" 
-            class="col" 
-            :rules="[val => !!val || 'Field is required']"
-            ref="name"
-            autofocus>             
-              <template v-slot:append>
-                <q-icon
-                  v-if="taskToSubmit.name" 
-                  name="close" 
-                  @click="taskToSubmit.name = ''" 
-                  class="cursor-pointer" />
-              </template>
-            </q-input> 
-        </div>
+        <!-- :name used to pass to the child ModelTaskName, and :name.sync to get back the data from child-->
+        <model-task-name 
+          :name.sync = "taskToSubmit.name"/>
 
         <div row class="q-mb-sm">
           <q-input 
@@ -83,6 +68,8 @@
           type="submit" 
            />
       </q-card-actions>
+
+      <pre>{{taskToSubmit}}</pre>
     </form>
 </q-card>
 </template>
@@ -125,7 +112,9 @@
       }
     },
     components:{
-      'model-header': require('components/Tasks/Modals/Shared/ModalHeader.vue').default
+      'model-header': require('components/Tasks/Modals/Shared/ModalHeader.vue').default,
+
+      'model-task-name': require('components/Tasks/Modals/Shared/ModalTaskName.vue').default
     }
 
     // directives:{
