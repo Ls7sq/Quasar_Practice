@@ -4,36 +4,16 @@
 
     <form @submit.prevent="submitForm">
       <q-card-section class="q-pt-none">
-        <!-- :name used to pass to the child ModelTaskName, and :name.sync to get back the data from child-->
+        
+        <!-- :name = "taskToSubmit.name" used to pass to the child ModelTaskName, and :name.sync to get back the data from child-->
         <model-task-name 
           :name.sync = "taskToSubmit.name"/>
 
-        <div row class="q-mb-sm">
-          <q-input 
-            outlined
-            label="Due date" 
-            v-model="taskToSubmit.dueDate">
-            <template v-slot:append>
+        <model-due-date
+          :dueDate.sync = "taskToSubmit.dueDate"
+          @clear="clearDueDate"/>
 
-              <q-icon
-                  v-if="taskToSubmit.dueDate" 
-                  name="close" 
-                  @click="clearDueDate" 
-                  class="cursor-pointer" />      
-
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                  <q-date v-model="taskToSubmit.dueDate">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
-
+        
         <div row class="q-mb-sm" v-if="taskToSubmit.dueDate">
           <q-input 
             outlined
@@ -114,8 +94,12 @@
     components:{
       'model-header': require('components/Tasks/Modals/Shared/ModalHeader.vue').default,
 
-      'model-task-name': require('components/Tasks/Modals/Shared/ModalTaskName.vue').default
+      'model-task-name': require('components/Tasks/Modals/Shared/ModalTaskName.vue').default,
+
+      'model-due-date': require('components/Tasks/Modals/Shared/ModalDueDate.vue').default
+    
     }
+
 
     // directives:{
     //   autofocus:{

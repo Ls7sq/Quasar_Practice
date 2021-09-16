@@ -19,7 +19,7 @@
         icon="add"
       />
     </div>
-
+    <!-- when the showAddTask is true then the <add-task/> will appear -->
     <q-dialog v-model="showAddTask">
       <add-task @close='showAddTask = false' />
     </q-dialog>
