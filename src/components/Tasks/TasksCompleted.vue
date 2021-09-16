@@ -3,7 +3,7 @@
 		<list-header
 			bgColor="bg-green-5">Completed</list-header>
 
-		<q-list v-if="Object.keys(tasksCompleted).length != 0" bordered separator>
+		<q-list  bordered separator>
 	      <task
 	        v-for='(task, key) in tasksCompleted'
 	        :key="key"

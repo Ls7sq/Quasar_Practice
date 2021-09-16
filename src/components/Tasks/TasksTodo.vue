@@ -3,7 +3,7 @@
 		<list-header
 			bgColor="bg-orange-4">Todo</list-header>
 
-		<q-list v-if="Object.keys(tasksTodo).length != 0" bordered separator>
+		<q-list bordered separator>
       <task
         v-for='(task, key) in tasksTodo'
         :key="key"

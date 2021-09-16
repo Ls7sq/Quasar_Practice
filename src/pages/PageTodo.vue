@@ -3,11 +3,13 @@
     <!-- <p>Todo Page</p> -->
 
     <tasks-todo
+      v-if="Object.keys(tasksTodo).length != 0"
      :tasksTodo="tasksTodo"/>
 
     
     
     <tasks-completed
+      v-if="Object.keys(tasksCompleted).length != 0"
      :tasksCompleted="tasksCompleted"/>
 
 
