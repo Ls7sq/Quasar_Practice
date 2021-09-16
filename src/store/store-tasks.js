@@ -65,21 +65,40 @@ const actions = {
 }
 
 const getters = {
+	tasksFiltered:(state)=>{
+		let tasksFiltered = {}
+		if (state.search) {
+			Object.keys(state.tasks).forEach(function(key)
+			{
+				let task = state.tasks[key],
+					taskNameLowerCase = task.name.toLowerCase(),
+					searchLowerCase = state.search.toLowerCase()
+				if (taskNameLowerCase.includes(searchLowerCase)) {
+					tasksFiltered[key] = task
+				}
+			})
+			return tasksFiltered
+		}else{
+			return state.tasks
+		}
+	},
 	//pass to the pagetodo.vue
-	tasksTodo: (state)=>{
-		let tasks={}
-		Object.keys(state.tasks).forEach(function(key){
-			let task = state.tasks[key]
+	tasksTodo: (state, getters)=>{
+		let tasksFiltered = getters.tasksFiltered
+		let tasks = {}
+		Object.keys(tasksFiltered).forEach(function(key){
+			let task = tasksFiltered[key]
 			if (!task.completed) {
 				tasks[key] = task
 			}
 		})
 		return tasks
 	},
-	tasksCompleted: (state)=>{
-		let tasks={}
-		Object.keys(state.tasks).forEach(function(key){
-			let task = state.tasks[key]
+	tasksCompleted: (state, getters)=>{
+		let tasksFiltered = getters.tasksFiltered
+		let tasks = {}
+		Object.keys(tasksFiltered).forEach(function(key){
+			let task = tasksFiltered[key]
 			if (task.completed) {
 				tasks[key] = task
 			}
