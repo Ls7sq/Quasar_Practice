@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md">
-    <p>Todo Page</p>
-    <q-list bordered separator>
+    <!-- <p>Todo Page</p> -->
+    <q-list v-if="Object.keys(tasks).length != 0" bordered separator>
       <task
         v-for='(task, key) in tasks'
         :key="key"

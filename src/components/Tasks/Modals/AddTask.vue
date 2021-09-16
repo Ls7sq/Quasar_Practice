@@ -24,7 +24,15 @@
             class="col" 
             :rules="[val => !!val || 'Field is required']"
             ref="name"
-            v-autofocus/> 
+            autofocus>             
+              <template v-slot:append>
+                <q-icon
+                  v-if="taskToSubmit.name" 
+                  name="close" 
+                  @click="taskToSubmit.name = ''" 
+                  class="cursor-pointer" />
+              </template>
+            </q-input> 
         </div>
 
         <div row class="q-mb-sm">
@@ -33,6 +41,13 @@
             label="Due date" 
             v-model="taskToSubmit.dueDate">
             <template v-slot:append>
+
+              <q-icon
+                  v-if="taskToSubmit.dueDate" 
+                  name="close" 
+                  @click="clearDueDate" 
+                  class="cursor-pointer" />      
+
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
                   <q-date v-model="taskToSubmit.dueDate">
@@ -46,12 +61,19 @@
           </q-input>
         </div>
 
-        <div row class="q-mb-sm">
+        <div row class="q-mb-sm" v-if="taskToSubmit.dueDate">
           <q-input 
             outlined
             label="Due time" 
+            class='col'
             v-model="taskToSubmit.dueTime" >
             <template v-slot:append>
+              <q-icon
+                  v-if="taskToSubmit.dueTime" 
+                  name="close" 
+                  @click="taskToSubmit.dueTime = '' " 
+                  class="cursor-pointer" />
+
               <q-icon name="access_time" class="cursor-pointer">
                 <q-popup-proxy transition-show="scale" transition-hide="scale">
                   <q-time v-model="taskToSubmit.dueTime">
@@ -67,7 +89,7 @@
 
       </q-card-section>
       <q-card-actions align="right">
-        <q-btn 
+        <q-btn
           label="Save" 
           color="primary"
           type="submit" 
@@ -108,15 +130,20 @@
 
         //triger the event in PageTodo.vue at <add-task/>
         this.$emit('close')      
-      }
-    },
-    directives:{
-      autofocus:{
-        inserted(el){
-          el.focus()
-        }
+      },
+      clearDueDate(){
+      this.taskToSubmit.dueDate = ''
+      this.taskToSubmit.dueTime = ''
       }
     }
+
+    // directives:{
+    //   autofocus:{
+    //     inserted(el){
+    //       el.focus()
+    //     }
+    //   }
+    // }
   }
 </script>
 
