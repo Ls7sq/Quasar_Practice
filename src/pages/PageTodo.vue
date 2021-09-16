@@ -2,8 +2,11 @@
   <q-page class="q-pa-md">
     <!-- <p>Todo Page</p> -->
 
+    <no-tasks
+      v-if="!Object.keys(tasksTodo).length != 0"></no-tasks>
+
     <tasks-todo
-      v-if="Object.keys(tasksTodo).length != 0"
+      v-else
      :tasksTodo="tasksTodo"/>
 
     
@@ -39,7 +42,11 @@ export default {
       showAddTask:false
     }
   },
-
+  mounted(){
+    this.$root.$on('showAddTask',()=>{
+      this.showAddTask=true
+    })
+  },
   computed:{
     ...mapGetters('tasks',['tasksTodo','tasksCompleted'])
   },
@@ -47,6 +54,7 @@ export default {
     'add-task': require('components/Tasks/Modals/AddTask.vue').default,
     'tasks-todo': require('components/Tasks/TasksTodo.vue').default,
     'tasks-completed': require('components/Tasks/TasksCompleted.vue').default,
+    'no-tasks': require('components/Tasks/NoTasks.vue').default
   }
 }
 </script>
