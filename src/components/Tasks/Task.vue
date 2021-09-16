@@ -46,15 +46,28 @@
         </q-item-section>
 
         <q-item-section side>
-        	<q-btn
-        		@click.stop="promptToDelete(id)" 
-        		flat 
-        		round
-        		dense 
-        		color='red' 
-        		icon="delete"/>
-        	
+          <div class="row">
+          	<q-btn
+          		@click.stop=" showEditTask = true" 
+          		flat 
+          		round
+          		dense 
+          		color='primary' 
+          		icon="edit"/>
+            <q-btn
+              @click.stop="promptToDelete(id)" 
+              flat 
+              round
+              dense 
+              color='red' 
+              icon="delete"/>
+          </div>
         </q-item-section>
+
+        <q-dialog v-model="showEditTask">
+          <edit-task @close='showAddTask = false' />
+        </q-dialog>
+        
       </q-item>
 </template>
 
@@ -65,6 +78,11 @@ import { Dialog } from 'quasar'
 export default{
 	props:['task','id'],
 
+  data(){
+    return{
+      showEditTask : true
+    }
+  },
   //pass to the store-tasks actions and mutations
 	methods:{
 	...mapActions('tasks',['updateTask', 'deleteTask']),
@@ -79,7 +97,10 @@ export default{
 	        this.deleteTask(id)
 	      })		
 	  }
-	}
+	},
+  components:{
+    'edit-task': require('components/Tasks/Modals/EditTask.vue').default
+  }
 }
 </script>
 

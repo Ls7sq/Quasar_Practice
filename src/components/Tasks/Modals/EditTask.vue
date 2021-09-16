@@ -19,7 +19,10 @@
           :dueTime.sync = "taskToSubmit.dueTime"/>
 
       </q-card-section>
-        <modal-buttons/>
+
+      <modal-buttons/>
+
+      <pre>{{taskToSubmit}}</pre>
     </form>
 </q-card>
 </template>
