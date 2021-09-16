@@ -1,44 +1,22 @@
 <template>
   <q-card>
-    <model-header>Add Task</model-header>
+    <modal-header>Add Task</modal-header>
 
     <form @submit.prevent="submitForm">
       <q-card-section class="q-pt-none">
         
         <!-- :name = "taskToSubmit.name" used to pass to the child ModelTaskName, and :name.sync to get back the data from child-->
-        <model-task-name 
+        <modal-task-name 
           :name.sync = "taskToSubmit.name"/>
 
-        <model-due-date
+        <modal-due-date
           :dueDate.sync = "taskToSubmit.dueDate"
           @clear="clearDueDate"/>
 
-        
-        <div row class="q-mb-sm" v-if="taskToSubmit.dueDate">
-          <q-input 
-            outlined
-            label="Due time" 
-            class='col'
-            v-model="taskToSubmit.dueTime" >
-            <template v-slot:append>
-              <q-icon
-                  v-if="taskToSubmit.dueTime" 
-                  name="close" 
-                  @click="taskToSubmit.dueTime = '' " 
-                  class="cursor-pointer" />
+        <modal-due-time
+          v-if="taskToSubmit.dueDate"
+          :dueTime.sync = "taskToSubmit.dueTime"/>
 
-              <q-icon name="access_time" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-time v-model="taskToSubmit.dueTime">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-time>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
 
       </q-card-section>
       <q-card-actions align="right">
@@ -92,12 +70,13 @@
       }
     },
     components:{
-      'model-header': require('components/Tasks/Modals/Shared/ModalHeader.vue').default,
+      'modal-header': require('components/Tasks/Modals/Shared/ModalHeader.vue').default,
 
-      'model-task-name': require('components/Tasks/Modals/Shared/ModalTaskName.vue').default,
+      'modal-task-name': require('components/Tasks/Modals/Shared/ModalTaskName.vue').default,
 
-      'model-due-date': require('components/Tasks/Modals/Shared/ModalDueDate.vue').default
-    
+      'modal-due-date': require('components/Tasks/Modals/Shared/ModalDueDate.vue').default,
+
+      'modal-due-time': require('components/Tasks/Modals/Shared/ModalDueTime.vue').default
     }
 
 
