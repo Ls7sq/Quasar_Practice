@@ -1,7 +1,10 @@
 <template>
   <q-page class="q-pa-md">
     <!-- <p>Todo Page</p> -->
-
+    <div row class="q-mb-lg">
+      <search/>
+    </div>
+    
     <no-tasks
       v-if="!Object.keys(tasksTodo).length != 0"></no-tasks>
 
@@ -54,7 +57,8 @@ export default {
     'add-task': require('components/Tasks/Modals/AddTask.vue').default,
     'tasks-todo': require('components/Tasks/TasksTodo.vue').default,
     'tasks-completed': require('components/Tasks/TasksCompleted.vue').default,
-    'no-tasks': require('components/Tasks/NoTasks.vue').default
+    'no-tasks': require('components/Tasks/NoTasks.vue').default,
+    'search': require('components/Tasks/Tools/Search.vue').default,
   }
 }
 </script>

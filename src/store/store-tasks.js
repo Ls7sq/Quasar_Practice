@@ -21,7 +21,8 @@ const state = {
 		  dueDate:'2021/09/16',
 		  dueTime:'20:30'
 		}
-	}
+	},
+	search:'Test'
 }
 
 const mutations = {
