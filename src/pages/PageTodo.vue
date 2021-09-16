@@ -5,7 +5,7 @@
     <tasks-todo
      :tasksTodo="tasksTodo"/>
 
-    <hr>
+    
     
     <tasks-completed
      :tasksCompleted="tasksCompleted"/>

@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<list-header>Todo</list-header>
+		<list-header
+			bgColor="bg-orange-4">Todo</list-header>
+
 		<q-list v-if="Object.keys(tasksTodo).length != 0" bordered separator>
       <task
         v-for='(task, key) in tasksTodo'
