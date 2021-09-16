@@ -63,9 +63,14 @@
               icon="delete"/>
           </div>
         </q-item-section>
-
+        
+        <!-- when the showEditTask is true then the <edit-task/> will appear -->
         <q-dialog v-model="showEditTask">
-          <edit-task @close='showAddTask = false' />
+          <edit-task 
+            @close='showEditTask = false' 
+            :task = "task"
+            :id = "id"
+          />
         </q-dialog>
         
       </q-item>
@@ -80,7 +85,7 @@ export default{
 
   data(){
     return{
-      showEditTask : true
+      showEditTask : false
     }
   },
   //pass to the store-tasks actions and mutations

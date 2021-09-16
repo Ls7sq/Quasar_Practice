@@ -1,6 +1,6 @@
 <template>
   <q-card>
-    <modal-header>Add Task</modal-header>
+    <modal-header>Edit Task</modal-header>
 
     <form @submit.prevent="submitForm">
       <q-card-section class="q-pt-none">
@@ -32,19 +32,16 @@
   import{ mapActions }from 'vuex'
 
   export default{
+    //get the task and id then pass to the store-tasks to execute the updateTask method
+    props:['task', 'id'],
     data(){
       return{
-        taskToSubmit:{
-            name: '',
-            dueDate:'',
-            dueTime:'',
-            completed: false
-        }
+        taskToSubmit:{}
       }
     },
     methods:{
-      //Here can trigger the anction called addTask in store-tasks.js
-      ...mapActions('tasks',['addTask']),
+      //Here can trigger the anction called updateTask in store-tasks.js
+      ...mapActions('tasks',['updateTask']),
 
       submitForm(){
         this.$refs.modalTaskName.$refs.name.validate()
@@ -54,9 +51,13 @@
         }
       },
       submitTask(){
-        this.addTask(this.taskToSubmit)
+        //the updateTask signature is required id and updates parameter
+        this.updateTask({
+          id:this.id,
+          updates:this.taskToSubmit
+        })
 
-        //triger the event in PageTodo.vue at <add-task/>
+        //triger the event in Task.vue at <edit-task/>
         this.$emit('close')      
       },
       clearDueDate(){
@@ -74,6 +75,10 @@
       'modal-due-time': require('components/Tasks/Modals/Shared/ModalDueTime.vue').default,
 
       'modal-buttons': require('components/Tasks/Modals/Shared/ModalButtons.vue').default
+    },
+    //mounted the existing data to the taskToSubmit object
+    mounted(){
+      this.taskToSubmit = Object.assign({}, this.task)
     }
 
 
