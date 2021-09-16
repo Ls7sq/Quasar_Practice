@@ -1,9 +1,9 @@
 <template>
   <q-page class="q-pa-md">
     <!-- <p>Todo Page</p> -->
-    <q-list v-if="Object.keys(tasks).length != 0" bordered separator>
+    <q-list v-if="Object.keys(tasksTodo).length != 0" bordered separator>
       <task
-        v-for='(task, key) in tasks'
+        v-for='(task, key) in tasksTodo'
         :key="key"
         :task='task'
         :id='key'>          
@@ -38,7 +38,7 @@ export default {
   },
 
   computed:{
-    ...mapGetters('tasks',['tasks'])
+    ...mapGetters('tasks',['tasksTodo'])
   },
   components:{
     'task': require('components/Tasks/Task.vue').default,
