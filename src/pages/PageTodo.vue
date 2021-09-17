@@ -1,10 +1,11 @@
 <template>
   <q-page class="q-pa-md">
     <!-- <p>Todo Page</p> -->
-    <div row class="q-mb-lg">
-      <search/>
+    <div class="q-mb-lg row">
+        <search/>
+        <sort/>          
     </div>
-    
+
     <p 
       v-if="search 
       && !Object.keys(tasksTodo).length 
@@ -65,6 +66,7 @@ export default {
     'tasks-completed': require('components/Tasks/TasksCompleted.vue').default,
     'no-tasks': require('components/Tasks/NoTasks.vue').default,
     'search': require('components/Tasks/Tools/Search.vue').default,
+    'sort':require('components/Tasks/Tools/Sort.vue').default
   }
 }
 </script>

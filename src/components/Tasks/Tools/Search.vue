@@ -1,6 +1,6 @@
 <template v-slot:append>
-  
       <q-input 
+      	class="col"
       	outlined
       	v-model="searchFiled" 
       	label="Search" 
@@ -18,7 +18,7 @@
 
 <script>
 	import {mapState, mapActions} from 'vuex'
-	
+
 	export default{
 		computed: {
 			...mapState('tasks',['search']),
