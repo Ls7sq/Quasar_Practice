@@ -1,41 +1,46 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page>
     <!-- <p>Todo Page</p> -->
-    <div class="q-mb-lg row">
-        <search/>
-        <sort/>          
-    </div>
 
-    <p 
-      v-if="search 
-      && !Object.keys(tasksTodo).length 
-      && !Object.keys(tasksCompleted).length">
-        No search Results.🥲
-    </p>
+    <div class="q-pa-md absolute full-width full-height column">
 
-  <div class="relative-position">
+      <div class="q-mb-lg row">
+          <search/>
+          <sort/>          
+      </div>
 
-    <no-tasks
-      v-if="!Object.keys(tasksTodo).length != 0 && !search"></no-tasks>
+      <p 
+        v-if="search 
+        && !Object.keys(tasksTodo).length 
+        && !Object.keys(tasksCompleted).length">
+          No search Results.🥲
+      </p>
 
-    <tasks-todo
-      v-if="Object.keys(tasksTodo).length"
-     :tasksTodo="tasksTodo"/>
     
-    <tasks-completed
-      v-if="Object.keys(tasksCompleted).length != 0"
-     :tasksCompleted="tasksCompleted"/>
+      <q-scroll-area class="q-scroll-area-tasks">
+        <no-tasks
+          v-if="!Object.keys(tasksTodo).length != 0 && !search"></no-tasks>
 
-  </div>
-  
-    <div class="absolute-bottom text-center q-mb-lg">
-      <q-btn
-        @click="showAddTask= true"
-        round
-        color="primary"
-        size="24px"
-        icon="add"
-      />
+        <tasks-todo
+          v-if="Object.keys(tasksTodo).length"
+         :tasksTodo="tasksTodo"/>
+        
+        <tasks-completed
+          v-if="Object.keys(tasksCompleted).length != 0"
+         :tasksCompleted="tasksCompleted"
+         class="q-mb-lg"/>
+
+      </q-scroll-area>
+
+      <div class="absolute-bottom text-center q-mb-lg">
+        <q-btn
+          @click="showAddTask= true"
+          round
+          color="primary"
+          size="24px"
+          icon="add"
+        />
+      </div>
     </div>
     <!-- when the showAddTask is true then the <add-task/> will appear -->
     <q-dialog v-model="showAddTask">
@@ -74,3 +79,9 @@ export default {
 }
 </script>
 
+<style>
+  .q-scroll-area-tasks{
+    display: flex;
+    flex-grow: 1;
+  }
+</style>
