@@ -4,7 +4,8 @@
       	outlined
       	v-model="searchFiled" 
       	label="Search"
-      	v-select-all 
+      	v-select-all
+      	@keyup.esc="searchFiled = ''"
       	>
         <template v-slot:append>
           <q-icon 
