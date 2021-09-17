@@ -13,6 +13,8 @@
         No search Results.🥲
     </p>
 
+  <div class="relative-position">
+
     <no-tasks
       v-if="!Object.keys(tasksTodo).length != 0 && !search"></no-tasks>
 
@@ -24,7 +26,8 @@
       v-if="Object.keys(tasksCompleted).length != 0"
      :tasksCompleted="tasksCompleted"/>
 
-
+  </div>
+  
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
         @click="showAddTask= true"
