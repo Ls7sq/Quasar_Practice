@@ -21,8 +21,6 @@
       </q-card-section>
 
       <modal-buttons/>
-
-      <pre>{{taskToSubmit}}</pre>
     </form>
 </q-card>
 </template>
@@ -77,7 +75,7 @@
       'modal-buttons': require('components/Tasks/Modals/Shared/ModalButtons.vue').default
     },
     //mounted the existing data to the taskToSubmit object
-    mounted(){
+    created(){
       this.taskToSubmit = Object.assign({}, this.task)
     }
 
