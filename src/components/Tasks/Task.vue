@@ -4,6 +4,7 @@
         clickable
         @click="updateTask({id: id, updates:{completed: !task.completed}})"
         :class="!task.completed ? 'bg-orange-2' : 'bg-green-2' "
+        v-touch-hold:1000.mouse="showEditTaskModal"
       >
         <q-item-section side top>
           <q-checkbox 
@@ -48,7 +49,7 @@
         <q-item-section side>
           <div class="row">
           	<q-btn
-          		@click.stop=" showEditTask = true" 
+          		@click.stop="showEditTaskModal" 
           		flat 
           		round
           		dense 
@@ -91,6 +92,9 @@ export default{
   //pass to the store-tasks actions and mutations
 	methods:{
 	...mapActions('tasks',['updateTask', 'deleteTask']),
+  showEditTaskModal(){
+    this.showEditTask=true
+  },
 	promptToDelete(id){
 	      Dialog.create({
 	        title: 'Confirm',
