@@ -65,12 +65,31 @@ const actions = {
 }
 
 const getters = {
-	tasksFiltered:(state)=>{
-		let tasksFiltered = {}
+
+	tasksSorted:(state)=>{
+		let tasksSorted = {},
+			keyOrdered = Object.keys(state.tasks)
+		keyOrdered.sort((a,b)=>{
+			let taskApro = state.tasks[a].name.toLowerCase(),
+			 	taskBpro = state.tasks[b].name.toLowerCase()
+
+			if (taskApro>taskBpro) return 1
+			else if (taskApro<taskBpro) return -1
+			else return 0
+		})
+		keyOrdered.forEach((key)=>{
+			tasksSorted[key] = state.tasks[key]
+		})
+		return tasksSorted
+	},
+
+	tasksFiltered:(state,getters)=>{
+		let tasksSorted = getters.tasksSorted,
+			tasksFiltered = {}
 		if (state.search) {
-			Object.keys(state.tasks).forEach(function(key)
+			Object.keys(tasksSorted).forEach(function(key)
 			{
-				let task = state.tasks[key],
+				let task = tasksSorted[key],
 					taskNameLowerCase = task.name.toLowerCase(),
 					searchLowerCase = state.search.toLowerCase()
 				if (taskNameLowerCase.includes(searchLowerCase)) {
@@ -79,7 +98,7 @@ const getters = {
 			})
 			return tasksFiltered
 		}else{
-			return state.tasks
+			return tasksSorted
 		}
 	},
 	//pass to the pagetodo.vue
