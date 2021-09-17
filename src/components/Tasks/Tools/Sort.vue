@@ -1,8 +1,9 @@
 <template>
 	<q-select
 		class="col q-ml-sm" 
-		v-model="model"
-		filled 
+		v-model="sortBy"
+		filled
+		emit-value 
 		:options="options" 
 		label="Sort by" 
 		stack-label 
@@ -13,10 +14,17 @@
 	export default {
   data () {
     return {
-      model: null,
+      sortBy: null,
 
       options: [
-        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle',
+        {
+        	label:'Name',
+        	value:'name'
+        },
+        {
+        	label:'Date',
+        	value:'dueDate'
+        }
       ]
     }
   }
