@@ -3,10 +3,11 @@
 		class="col q-ml-sm" 
 		v-model="sortBy"
 		filled
-		emit-value 
 		:options="options" 
 		label="Sort by" 
-		stack-label 
+		stack-label
+		emit-value
+		 
 		/>
 </template>
 
