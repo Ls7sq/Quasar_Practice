@@ -45,12 +45,37 @@
         </q-item-section>
       </q-item>
 
+      <q-item 
+        tag='label' 
+        v-ripple
+        @click="visitOutWebsite">
+        <q-item-section>
+          <q-item-label>Vist our website</q-item-label>
+        </q-item-section>
+        <q-item-section side >
+          <q-icon name="chevron_right"/>
+        </q-item-section>
+      </q-item>
+
+      <q-item 
+        tag='label' 
+        v-ripple
+        @click="emailUs">
+        <q-item-section>
+          <q-item-label>Email Us</q-item-label>
+        </q-item-section>
+        <q-item-section side >
+          <q-icon name="chevron_right"/>
+        </q-item-section>
+      </q-item>
+
     </q-list>    
   </q-page>
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import { openURL } from 'quasar'
 export default {
   computed:{
     ...mapGetters('settings',['settings']),
@@ -73,7 +98,13 @@ export default {
 
   },
   methods:{
-    ...mapActions('settings',['setShow12HourTimeFormat','setShowTaskInOneList'])
+    ...mapActions('settings',['setShow12HourTimeFormat','setShowTaskInOneList']),
+    visitOutWebsite(){
+      openURL('http://www.google.com')
+    },
+    emailUs(){
+      window.location.href="mailto:lsq9388@gmail.com?subject=Well Done"
+    }
   }
 
 }
