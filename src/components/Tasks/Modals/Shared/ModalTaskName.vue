@@ -23,20 +23,11 @@
 </template>
 
 <script>
+	import {selectAll} from'src/directives/directive-select-all'
 	export default{
 		props:['name'],
 		directives:{
-			selectAll:{
-				bind(el){
-					//pass in the input class which found in the page
-					let input = el.querySelector('.q-field__native')
-					input.addEventListener('focus',()=>{
-						if (input.value.length) {
-							input.select()
-						}
-					})
-				}
-			}
+			selectAll
 		}
 	}
 </script>
