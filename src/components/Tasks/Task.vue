@@ -117,8 +117,8 @@ export default{
       return date.formatDate(value,'MMM D')
     },
     searchHighlight(value, search){
-       console.log('value', value)
-       console.log('search', search)
+       // console.log('value', value)
+       // console.log('search', search)
       if (search) {
         let searchRegExp = new RegExp(search,'ig')
         return value.replace(searchRegExp, (match)=>{
