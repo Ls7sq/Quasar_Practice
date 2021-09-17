@@ -19,7 +19,7 @@
     
       <q-scroll-area class="q-scroll-area-tasks">
         <no-tasks
-          v-if="!Object.keys(tasksTodo).length != 0 && !search"></no-tasks>
+          v-if="!Object.keys(tasksTodo).length != 0 && !search && !settings.showTasksInOneList"></no-tasks>
 
         <tasks-todo
           v-if="Object.keys(tasksTodo).length"
@@ -67,6 +67,7 @@ export default {
   },
   computed:{
     ...mapGetters('tasks',['tasksTodo','tasksCompleted']),
+    ...mapGetters('settings',['settings']),
     ...mapState('tasks',['search'])
   },
   components:{
