@@ -5,12 +5,19 @@
         <q-toolbar-title class="absolute-center">
           Awesome ToDo
         </q-toolbar-title>
+
+        <q-btn
+          to="/auth" 
+          flat
+          icon-right='account_circle' 
+          label='Login'
+          class="absolute-right"/>
       </q-toolbar>
     </q-header>
 
     <q-footer>
       <q-tabs>
-        <q-route-tab
+        <q-route-tab class="col"
           v-for="nav in navs"
           :key="nav.label"
           :icon="nav.icon"
