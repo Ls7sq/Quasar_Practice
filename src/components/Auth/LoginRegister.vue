@@ -5,7 +5,7 @@
 		      <template v-slot:avatar>
 		        <q-icon name="account_circle" color="primary" />
 		      </template>
-		      Register to access this app
+		      {{tab | titleCase}} to access this app
 		    </q-banner>
 	    </div>
 	    <div class="row q-mb-md">
@@ -37,7 +37,7 @@
 			<q-space/>
 			<q-btn 
 				color="primary" 
-				label="Register"
+				:label="tab"
 				type="submit"/>
 		</div>
 	</form>
@@ -45,6 +45,7 @@
 
 <script>
 	export default{
+		props:['tab'],
 		data(){
 			return{
 				formData:{
@@ -58,12 +59,21 @@
 				this.$refs.email.validate()
 				this.$refs.password.validate()
 				if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
-					console.log('yup')
+					if (this.tab == 'login') {
+						console.log('Login')
+					}else{
+						console.log('register')
+					}
 				}
 			},
 			isValidEmailAddress(email){
 				var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 				return re.test(String(email).toLowerCase())
+			}
+		},
+		filters:{
+			titleCase(value){
+				return value.charAt(0).toUpperCase() + value.slice(1)
 			}
 		}
 	}
