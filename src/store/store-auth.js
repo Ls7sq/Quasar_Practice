@@ -1,5 +1,5 @@
 import {firebaseAuth} from 'boot/firebase'
-
+import { LocalStorage } from 'quasar'
 const state = {
 	loggedIn: false
 }
@@ -55,12 +55,14 @@ const actions = {
 		
 		if (user) {
 		    commit('setLoggedIn',true)
+		    LocalStorage.set('loggedIn', true)
 		    this.$router.push('/').catch(err=>{
 		    	console.log('error message: ', err.message)
 		    })
 		    //dispatch('tasks/fbReadData', null, {root : true}))
 		}else{
 			commit('setLoggedIn',false)
+			LocalStorage.set('loggedIn', false)
 			this.$router.replace('/auth').catch(err=>{
 		    	console.log('error message: ', err.message)
 		    	})
