@@ -8,7 +8,8 @@
         label="Due time" 
         class='col'
         :value="dueTime" 
-        @input="$emit('update:dueTime',$event)">
+        @input="$emit('update:dueTime',$event)"
+        :rules="[val => checkValidTime(val) || 'Please enter valid Time']">
         <template v-slot:append>
           <q-icon
               v-if="dueTime" 
@@ -34,6 +35,13 @@
 
 <script>
 	export default{
-		props:['dueTime']
+		props:['dueTime'],
+
+    methods:{
+        checkValidTime(dueTime){
+        var re = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/ 
+        return re.test(dueTime)
+      }
+    }
 	}
 </script>

@@ -48,10 +48,10 @@ const mutations = {
 }
 
 const actions = {
-	updateTask({ commit }, payload){
+	updateTask({ dispatch }, payload){
 		// console.log('updateTask action')
 		// console.log('payload: ', payload)
-		commit('updateTask', payload)
+		dispatch('fbUpdateTask', payload)
 	},
 	deleteTask({commit}, id){
 		commit('deleteTask', id)
@@ -110,9 +110,16 @@ const actions = {
 	fbAddTask({},payload){
 		let userId = firebaseAuth.currentUser.uid
 		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
-		console.log('payload: ', payload)
-		console.log('taskRef: ', taskRef)
+		//console.log('payload: ', payload)
+		//console.log('taskRef: ', taskRef)
 		taskRef.set(payload.task)
+	},
+	fbUpdateTask({}, payload){
+		let userId = firebaseAuth.currentUser.uid
+		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
+		//console.log('payload: ', payload)
+		//console.log('taskRef: ', taskRef)
+		taskRef.update(payload.updates)
 	}
 }
 

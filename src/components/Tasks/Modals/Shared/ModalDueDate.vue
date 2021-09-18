@@ -4,7 +4,8 @@
             outlined
             label="Due date" 
             :value="dueDate"
-            @input="$emit('update:dueDate',$event)">
+            @input="$emit('update:dueDate',$event)"
+            :rules="[val => checkValidDate(val) || 'Please enter valid Date']">
             <template v-slot:append>
 
               <q-icon
@@ -30,7 +31,15 @@
 </template>
 
 <script>
+import {date} from 'quasar'
+
 	export default{
-		props:["dueDate"]
+		props:["dueDate"],
+
+    methods:{
+        checkValidDate(dueDate){
+        return date.isValid(dueDate)
+      }
+    }
 	}
 </script>
