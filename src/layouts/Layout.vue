@@ -15,6 +15,7 @@
           class="absolute-right"/>
 
         <q-btn
+          @click="logoutUser"
           v-else
           flat
           icon-right='account_circle' 
@@ -95,7 +96,7 @@
   //       link: '/settings'
   //     }
   //   ]
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
 
   export default {
     name: 'MainLayout',
@@ -120,6 +121,9 @@
     },
     computed:{
       ...mapState('auth',['loggedIn'])
+    },
+    methods:{
+      ...mapActions('auth',['logoutUser'])
     }
   }
 </script>

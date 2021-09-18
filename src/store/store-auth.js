@@ -29,6 +29,9 @@ const actions = {
 				console.log('error message: ', error.message)
 			})
 	},
+	logoutUser({},payload){
+		firebaseAuth.signOut()
+	},
 	handleAuthStateChange({commit}){
 		firebaseAuth.onAuthStateChanged(function(user) {
 		  if (user) {
