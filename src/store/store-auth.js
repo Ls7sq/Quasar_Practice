@@ -33,11 +33,17 @@ const actions = {
 		firebaseAuth.signOut()
 	},
 	handleAuthStateChange({commit}){
-		firebaseAuth.onAuthStateChanged(function(user) {
+		firebaseAuth.onAuthStateChanged(user=> {
 		  if (user) {
 		    commit('setLoggedIn',true)
+		    this.$router.push('/').catch(err=>{
+		    	console.log('error message: ', err.message)
+		    })
 		}else{
 			commit('setLoggedIn',false)
+			this.$router.replace('/auth').catch(err=>{
+		    	console.log('error message: ', err.message)
+		    	})
 			}
 		});
 	}
