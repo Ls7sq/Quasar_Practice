@@ -3,24 +3,24 @@ import {uid} from 'quasar'
 
 const state = {
 	tasks:{
-		'ID1':{
-		  name: 'Go to shop',
-		  completed: false,
-		  dueDate:'2021/09/14',
-		  dueTime:'21:30'
-		},
-		'ID2':{
-		  name: 'Get bananas',
-		  completed: false,
-		  dueDate:'2021/09/15',
-		  dueTime:'18:30'
-		},
-		'ID3':{
-		  name: 'Get apples',
-		  completed: false,
-		  dueDate:'2021/09/16',
-		  dueTime:'20:30'
-		}
+		// 'ID1':{
+		//   name: 'Go to shop',
+		//   completed: false,
+		//   dueDate:'2021/09/14',
+		//   dueTime:'21:30'
+		// },
+		// 'ID2':{
+		//   name: 'Get bananas',
+		//   completed: false,
+		//   dueDate:'2021/09/15',
+		//   dueTime:'18:30'
+		// },
+		// 'ID3':{
+		//   name: 'Get apples',
+		//   completed: false,
+		//   dueDate:'2021/09/16',
+		//   dueTime:'20:30'
+		// }
 	},
 	search:'',
 	sort:'name'
@@ -69,6 +69,9 @@ const actions = {
 	setSort({commit}, value){
 		commit('setSort',value)
 	},
+	fbReadData({commit}){
+		console.log("start read the data from firebase")
+	}
 }
 
 const getters = {
