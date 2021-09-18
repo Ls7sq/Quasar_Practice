@@ -100,7 +100,12 @@ const actions = {
 			}
 			commit('updateTask',payload)
 		})
-
+		//child removed
+		userTasks.on('child_removed', snapshot=>{
+			//console.log('snapshot', snapshot)
+			let taskId = snapshot.key
+			commit('deleteTask',taskId)
+		})
 	}
 }
 
