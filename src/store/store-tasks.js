@@ -56,13 +56,13 @@ const actions = {
 	deleteTask({commit}, id){
 		commit('deleteTask', id)
 	},
-	addTask({commit}, task){
+	addTask({dispatch}, task){
 		let taskId = uid()
 		let payload = {
 			id : taskId,
 			task: task
 		}
-		commit('addTask',payload)
+		dispatch('fbAddTask',payload)
 	},
 	setSearch({commit}, value){
 		commit('setSearch',value)
@@ -106,6 +106,13 @@ const actions = {
 			let taskId = snapshot.key
 			commit('deleteTask',taskId)
 		})
+	},
+	fbAddTask({},payload){
+		let userId = firebaseAuth.currentUser.uid
+		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
+		console.log('payload: ', payload)
+		console.log('taskRef: ', taskRef)
+		taskRef.set(payload.task)
 	}
 }
 
