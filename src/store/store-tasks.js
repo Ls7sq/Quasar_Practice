@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import {uid} from 'quasar'
 import {firebaseDb, firebaseAuth} from 'boot/firebase'
+import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
 	tasks:{
@@ -48,6 +49,9 @@ const mutations = {
 	},
 	setTaskDownloaded(state, value){
 		state.tasksDownloaded = value
+	},
+	clearTask(state){
+		state.tasks = {}
 	}
 
 }
@@ -122,20 +126,32 @@ const actions = {
 		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
 		//console.log('payload: ', payload)
 		//console.log('taskRef: ', taskRef)
-		taskRef.set(payload.task)
+		taskRef.set(payload.task, error=>{
+			if (error) {
+				showErrorMessage(error.message)				
+			}
+		})
 	},
 	fbUpdateTask({}, payload){
 		let userId = firebaseAuth.currentUser.uid
 		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
 		//console.log('payload: ', payload)
 		//console.log('taskRef: ', taskRef)
-		taskRef.update(payload.updates)
+		taskRef.update(payload.updates, error=>{
+			if (error) {
+				showErrorMessage(error.message)
+			}
+		})
 	},
 	fbDeleteTask({}, taskId){
 		let userId = firebaseAuth.currentUser.uid
 		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
 
-		taskRef.remove()
+		taskRef.remove(error=>{
+			if (error) {
+				showErrorMessage(error.message)
+			}
+		})
 	}
 }
 
