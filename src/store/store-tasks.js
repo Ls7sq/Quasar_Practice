@@ -83,13 +83,18 @@ const actions = {
 		//console.log("start read the data from firebase")
 		//console.log(firebaseAuth.currentUser)
 		let userId = firebaseAuth.currentUser.uid
-
 		let userTasks = firebaseDb.ref('tasks/' + userId)
 		//console.log('userTasks: ',userTasks)
 
 		//initial check for data
 		userTasks.once('value', snapshot=>{
 			commit('setTaskDownloaded', true)
+		}, error=>{
+			if (error) {	
+				showErrorMessage(error.message)
+				firebaseAuth.signOut()
+				this.$router.replace('/auth')
+			}
 		})
 
 		//child added

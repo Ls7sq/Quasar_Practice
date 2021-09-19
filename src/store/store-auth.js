@@ -62,7 +62,8 @@ const actions = {
 			    this.$router.push('/').catch(err=>{
 			    	console.log('error message: ', err.message)
 			    })
-			    dispatch('tasks/fbReadData', null, {root : true})}
+			    dispatch('tasks/fbReadData', null, {root : true})
+			}
 			else{
 				commit('tasks/clearTask', null, {root: true})
 				commit('tasks/setTasksDownloaded', false, {root: true})
