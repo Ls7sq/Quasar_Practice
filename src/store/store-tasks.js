@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import {uid} from 'quasar'
+import {uid, Notify} from 'quasar'
 import {firebaseDb, firebaseAuth} from 'boot/firebase'
 import { showErrorMessage } from 'src/functions/function-show-error-message'
 
@@ -134,6 +134,8 @@ const actions = {
 		taskRef.set(payload.task, error=>{
 			if (error) {
 				showErrorMessage(error.message)				
+			}else{
+				Notify.create('Task added!')
 			}
 		})
 	},
@@ -145,6 +147,12 @@ const actions = {
 		taskRef.update(payload.updates, error=>{
 			if (error) {
 				showErrorMessage(error.message)
+			}else{		
+				let keys = Object.keys(payload.updates)
+				
+				if (!(keys == 'completed'&& keys.length ==1)) {
+					Notify.create('Task updated!')
+				}
 			}
 		})
 	},
@@ -155,6 +163,8 @@ const actions = {
 		taskRef.remove(error=>{
 			if (error) {
 				showErrorMessage(error.message)
+			}else{
+				Notify.create('Task deleted!')
 			}
 		})
 	}
